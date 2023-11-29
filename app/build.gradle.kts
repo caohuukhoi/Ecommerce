@@ -4,7 +4,8 @@ plugins {
     id("kotlin-parcelize")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
-//    id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -37,6 +38,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
 }
 
 dependencies {
@@ -45,9 +50,15 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.9.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    //Navigation component
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
+
 
     //loading button
     implementation("com.github.leandroborgesferreira:loading-button-android:2.3.0")
@@ -68,19 +79,12 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
 
 ////    //Dagger hilt
-//    implementation("com.google.dagger:hilt-android:2.38.1")
-//    kapt("com.google.dagger:hilt-compiler:2.38.1")
-
-    // Dagger2
-    implementation("com.google.dagger:dagger:2.48.1")
-    implementation("com.google.dagger:dagger-android:2.48.1")
-    implementation("com.google.dagger:dagger-android-support:2.48.1")
-    // ksp không tương thích với dagger nên phải dùng kapt
-    kapt("com.google.dagger:dagger-compiler:2.48.1")
-    kapt("com.google.dagger:dagger-android-processor:2.48.1")
+    implementation("com.google.dagger:hilt-android:2.48.1")
+    kapt("com.google.dagger:hilt-compiler:2.48.1")
 
     // LeakCanary
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.12")
 
-
+    // firebase
+    implementation("com.google.firebase:firebase-auth:22.3.0")
 }
