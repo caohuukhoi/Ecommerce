@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Do you have an account? log in"
+                android:text="Do you have an account? Login"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="@id/tvLetsRegister"
                 app:layout_constraintStart_toStartOf="@id/tvLetsRegister"
