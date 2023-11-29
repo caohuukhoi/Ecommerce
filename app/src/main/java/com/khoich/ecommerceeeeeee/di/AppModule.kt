@@ -3,6 +3,7 @@ package com.khoich.ecommerceeeeeee.di
 import android.app.Application
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
@@ -18,9 +19,9 @@ object AppModule {
     @Singleton
     fun provideFirebaseAuth() = FirebaseAuth.getInstance()
 
-//    @Provides
-//    @Singleton
-//    fun provideFirebaseFirestoreDatabase() = Firebase.firestore
+    @Provides
+    @Singleton
+    fun provideFirebaseFirestoreDatabase() = Firebase.firestore
 //
 //    @Provides
 //    fun provideIntroductionSP(
