@@ -14,6 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.khoich.ecommerceeeeeee.R
 import com.khoich.ecommerceeeeeee.activities.ShoppingActivity
 import com.khoich.ecommerceeeeeee.databinding.FragmentLoginBinding
+import com.khoich.ecommerceeeeeee.dialog.setupBottomSheetDialog
 import com.khoich.ecommerceeeeeee.util.Resource
 import com.khoich.ecommerceeeeeee.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,28 +51,29 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         binding.tvForgotPasswordLogin.setOnClickListener {
-//            setupBottomSheetDialog { email ->
-//                viewModel.resetPassword(email)
-//            }
+            setupBottomSheetDialog { email ->
+                viewModel.resetPassword(email)
+            }
         }
-//
-//        lifecycleScope.launch {
-//            viewModel.resetPassword.collect{
-//                when (it) {
-//                    is Resource.Loading -> {
-//                    }
-//                    is Resource.Success -> {
-//                        Snackbar.make(requireView(),"Reset link was sent to your email",Snackbar.LENGTH_LONG).show()
-//                    }
-//                    is Resource.Error -> {
-//                        Snackbar.make(requireView(),"Error: ${it.message}",Snackbar.LENGTH_LONG).show()
-//                    }
-//                    else -> Unit
-//
-//                }
-//            }
-//        }
 
+        lifecycleScope.launch {
+            viewModel.resetPassword.collect{
+                when (it) {
+                    is Resource.Loading -> {
+                    }
+                    is Resource.Success -> {
+                        Snackbar.make(requireView(),"Reset link was sent to your email",Snackbar.LENGTH_LONG).show()
+                    }
+                    is Resource.Error -> {
+                        Snackbar.make(requireView(),"Error: ${it.message}",Snackbar.LENGTH_LONG).show()
+                    }
+                    else -> Unit
+
+                }
+            }
+        }
+
+        // cái này để thay thế cho observer
         lifecycleScope.launch {
             viewModel.login.collect {
                 when (it) {

@@ -66,14 +66,13 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                         // Do something with success
                         binding.buttonRegisterRegister.revertAnimation()
 //                        binding.buttonRegisterRegister.setBackgroundResource(R.drawable.blue_background)
+                        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                     }
-
                     is Resource.Error -> {
                         Log.e(TAG, it.message.toString())
                         // Do something with error
                         binding.buttonRegisterRegister.revertAnimation()
                     }
-
                     else -> Unit
                 }
             }
