@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-private val TAG = "MainCategoryFragment"
+private const val TAG = "MainCategoryFragment"
 
 @AndroidEntryPoint
 class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
