@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/img_ad"
+            android:id="@+id/imageSpecialRvItem"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_marginStart="16dp"
@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_ad_name"
+            android:id="@+id/tvSpecialProductName"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
@@ -32,19 +32,19 @@
             android:textColor="@color/black"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/img_ad"
-            app:layout_constraintTop_toTopOf="@id/img_ad" />
+            app:layout_constraintStart_toEndOf="@id/imageSpecialRvItem"
+            app:layout_constraintTop_toTopOf="@id/imageSpecialRvItem" />
 
         <TextView
-            android:id="@+id/tv_ad_price"
+            android:id="@+id/tvSpecialPrdouctPrice"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/sf_pro_display"
             android:text="$1600"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@id/tv_ad_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_ad_name" />
+            app:layout_constraintStart_toStartOf="@id/tvSpecialProductName"
+            app:layout_constraintTop_toBottomOf="@id/tvSpecialProductName" />
 
         <com.github.leandroborgesferreira.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/btn_add_to_cart"
@@ -59,7 +59,7 @@
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_ad_price" />
+            app:layout_constraintTop_toBottomOf="@id/tvSpecialPrdouctPrice" />
 
         <LinearLayout
             android:layout_width="23dp"
