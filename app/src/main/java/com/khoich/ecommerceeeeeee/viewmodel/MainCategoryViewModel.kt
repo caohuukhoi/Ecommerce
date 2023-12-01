@@ -44,10 +44,10 @@ class MainCategoryViewModel @Inject constructor(
                     _specialProducts.emit(Resource.Success(specialProductsList))
                 }
             }.addOnFailureListener {
-            viewModelScope.launch {
-                _specialProducts.emit(Resource.Error(it.message.toString()))
+                viewModelScope.launch {
+                    _specialProducts.emit(Resource.Error(it.message.toString()))
+                }
             }
-        }
     }
 
     private fun fetchBestDeals() {
@@ -67,7 +67,7 @@ class MainCategoryViewModel @Inject constructor(
             }
     }
 
-    private fun fetchBestProducts() {
+    fun fetchBestProducts() {
         if (!pagingInfo.isPagingEnd) {
             viewModelScope.launch {
                 _bestProducts.emit(Resource.Loading())
@@ -91,6 +91,7 @@ class MainCategoryViewModel @Inject constructor(
 
     // cái này để giới hạn sản phẩm 1 lần kéo xuống, nếu quá nhiều sẽ ảnh hưởng đến tương tác người dùng
     // khi kéo xuống đến giới hạn sẽ tự động reload thêm sản phẩm
+    //old để kiểm tra xem cái list này có giong list cũ không, nếu có sẽ không load thanh progress(vẫn gọi fetch nhưng sẽ bị kiểm tra bởi if)
     internal data class PagingInfo(
         var bestProductsPage: Long = 1,
         var oldBestProducts: List<Product> = emptyList(),
