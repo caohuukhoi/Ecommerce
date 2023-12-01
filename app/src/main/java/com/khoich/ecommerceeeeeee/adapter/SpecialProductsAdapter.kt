@@ -24,7 +24,11 @@ class SpecialProductsAdapter : RecyclerView.Adapter<SpecialProductsAdapter.Speci
         }
     }
 
+    // lần cập nhật đầu tiên lúc không có danh sách cũ thì sẽ coi tất cả các mục là cần cập nhật
     // theo dõi sự thay đổi của danh sách truyền vào
+    // kiểu so sánh lại lần lượt từng item ở mỗi vị trí của 2 list cũ và list mới, tương đương với oldItem và newItem
+    // kiểu 0-0,1-1,2-2,..., nếu danh sách cũ thay đổi số lượng kiểu bớt đi,
+    // thì item cũ không tồn tại thì sẽ coi như cập nhật, tương tụ với thêm
     private val diffCallback = object : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
             return oldItem.id == newItem.id

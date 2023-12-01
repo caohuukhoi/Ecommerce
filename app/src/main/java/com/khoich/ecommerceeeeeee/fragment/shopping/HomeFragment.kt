@@ -47,6 +47,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.viewpagerHome.adapter = viewPager2Adapter
 
         // cái này để truyền vào tabLayout các danh mục, nó sẽ dựa vào số lượng các fragment để tạo tablayout
+        // cai TabLayoutMediator tự động liên kết các fragment trong viewpager với các tab
+        // số lượng tab dựa vào số lượng fragment có trong binding.viewpagerHome
         TabLayoutMediator(binding.tabLayout, binding.viewpagerHome) { tab, position ->
             when (position) {
                 0 -> tab.text = "Main"
