@@ -17,6 +17,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class FurnitureFragment: BaseCategoryFragment() {
+
     @Inject
     lateinit var firestore: FirebaseFirestore
 
@@ -47,9 +48,7 @@ class FurnitureFragment: BaseCategoryFragment() {
             }
         }
 
-        // LiveData không cần  lifecycleScope.launch vì LiveData tự động quản lý luồng xử lý dữ liệu
-        // còn Flow thì không
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             viewModel.bestProducts.collectLatest {
                 when (it) {
                     is Resource.Loading -> {

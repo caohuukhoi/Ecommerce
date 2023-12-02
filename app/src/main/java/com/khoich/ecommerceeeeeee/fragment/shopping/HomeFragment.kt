@@ -33,15 +33,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         // truyền các frament vào
         val categoriesFragments = arrayListOf(
-            MainCategoryFragment(),
+            FurnitureFragment(),
             ChairFragment(),
-            CupboardFragment(),
             TableFragment(),
             AccessoryFragment(),
-            FurnitureFragment(),
+            CupboardFragment(),
+            MainCategoryFragment(),
         )
 
         binding.viewpagerHome.isUserInputEnabled = false
+
         val viewPager2Adapter =
             HomeViewpagerAdapter(categoriesFragments, childFragmentManager, lifecycle)
         binding.viewpagerHome.adapter = viewPager2Adapter
@@ -52,12 +53,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         TabLayoutMediator(binding.tabLayout, binding.viewpagerHome) { tab, position ->
             when (position) {
                 0 -> tab.text = "Main"
-                1 -> tab.text = "Chair"
-                2 -> tab.text = "Cupboard"
+                1 -> tab.text = "Furniture"
+                2 -> tab.text = "Chair"
                 3 -> tab.text = "Table"
                 4 -> tab.text = "Accessory"
-                5 -> tab.text = "Furniture"
+                5 -> tab.text = "Cupboard"
             }
         }.attach()
     }
+
 }

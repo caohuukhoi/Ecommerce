@@ -28,7 +28,7 @@ class ChairFragment : BaseCategoryFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch {
+        lifecycleScope.launch{
             viewModel.offerProducts.collectLatest {
                 when (it) {
                     is Resource.Loading -> {
@@ -48,9 +48,7 @@ class ChairFragment : BaseCategoryFragment() {
             }
         }
 
-        // LiveData không cần  lifecycleScope.launch vì LiveData tự động quản lý luồng xử lý dữ liệu
-        // còn Flow thì không
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             viewModel.bestProducts.collectLatest {
                 when (it) {
                     is Resource.Loading -> {

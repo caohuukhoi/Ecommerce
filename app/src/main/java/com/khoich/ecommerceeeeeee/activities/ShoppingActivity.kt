@@ -11,7 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ShoppingActivity : AppCompatActivity() {
 
-    private val binding by lazy {
+    val binding by lazy {
         ActivityShoppingBinding.inflate(layoutInflater)
     }
     override fun onCreate(savedInstanceState: Bundle?) {

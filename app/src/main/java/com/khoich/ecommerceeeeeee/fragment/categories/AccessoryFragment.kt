@@ -16,7 +16,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AccessoryFragment: BaseCategoryFragment(){
+class AccessoryFragment: BaseCategoryFragment() {
+
     @Inject
     lateinit var firestore: FirebaseFirestore
 
@@ -47,9 +48,7 @@ class AccessoryFragment: BaseCategoryFragment(){
             }
         }
 
-        // LiveData không cần  lifecycleScope.launch vì LiveData tự động quản lý luồng xử lý dữ liệu
-        // còn Flow thì không
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             viewModel.bestProducts.collectLatest {
                 when (it) {
                     is Resource.Loading -> {
@@ -77,5 +76,4 @@ class AccessoryFragment: BaseCategoryFragment(){
     override fun onOfferPagingRequest() {
 
     }
-
 }

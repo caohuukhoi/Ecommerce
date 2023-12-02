@@ -58,7 +58,6 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 
-
     //loading button
     implementation("com.github.leandroborgesferreira:loading-button-android:2.3.0")
 
@@ -88,4 +87,9 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:22.3.0")
     //firestore
     implementation("com.google.firebase:firebase-firestore-ktx:24.9.1")
+    //storage
+    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
+
+    //Coroutines with firebase
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
 }

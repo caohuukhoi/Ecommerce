@@ -11,7 +11,7 @@ class BaseCategoryViewModelFactoryFactory(
     private val category: Category
 ): ViewModelProvider.Factory {
 
-    // thay cho Inject
+    // thay cho Inject cấp các tham số trong constructor cho CategoryViewModel
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return CategoryViewModel(firestore,category) as T
     }

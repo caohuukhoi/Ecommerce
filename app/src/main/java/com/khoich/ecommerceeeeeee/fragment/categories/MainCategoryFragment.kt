@@ -10,12 +10,14 @@ import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.khoich.ecommerceeeeeee.R
 import com.khoich.ecommerceeeeeee.adapter.BestDealsAdapter
 import com.khoich.ecommerceeeeeee.adapter.BestProductsAdapter
 import com.khoich.ecommerceeeeeee.adapter.SpecialProductsAdapter
 import com.khoich.ecommerceeeeeee.databinding.FragmentMainCategoryBinding
 import com.khoich.ecommerceeeeeee.util.Resource
+import com.khoich.ecommerceeeeeee.util.showBottomNavigationView
 import com.khoich.ecommerceeeeeee.viewmodel.MainCategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -46,6 +48,22 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
         setupSpecialProductsRv()
         setupBestDealsRv()
         setupBestProducts()
+
+        // viet putParcelable này tránh Deprecate
+        specialProductsAdapter.onClick = {
+            val b = Bundle().apply { putParcelable("product", it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment, b)
+        }
+
+        bestDealsAdapter.onClick = {
+            val b = Bundle().apply { putParcelable("product", it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment, b)
+        }
+
+        bestProductsAdapter.onClick = {
+            val b = Bundle().apply { putParcelable("product", it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment, b)
+        }
 
         lifecycleScope.launch {
             // cái special tương đương với list, collectLatest tương đương với observer
@@ -128,13 +146,14 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
         // là constrain -> frame -> linear thì con đầu tiên là constrain
         binding.nestedScrollMainCategory.setOnScrollChangeListener(
             NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, _ ->
-            if (v.getChildAt(0).bottom <= v.height + scrollY) {
-                viewModel.fetchBestProducts()
-            }
-        })
+                if (v.getChildAt(0).bottom <= v.height + scrollY) {
+                    viewModel.fetchBestProducts()
+                }
+            })
     }
 
     private fun setupBestProducts() {
+        // cái này là không khai báo kiểu lazy như các fragment khác nên cần thêm 1 dòng gắn adapter như 1 dòng dưới
         bestProductsAdapter = BestProductsAdapter()
         binding.rvBestProducts.adapter = bestProductsAdapter
     }
@@ -155,5 +174,10 @@ class MainCategoryFragment : Fragment(R.layout.fragment_main_category) {
 
     private fun showLoading() {
         binding.mainCategoryProgressbar.visibility = View.VISIBLE
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showBottomNavigationView()
     }
 }

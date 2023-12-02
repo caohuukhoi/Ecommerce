@@ -15,6 +15,7 @@ import javax.inject.Inject
 class MainCategoryViewModel @Inject constructor(
     private val firestore: FirebaseFirestore
 ) : ViewModel() {
+
     private val _specialProducts = MutableStateFlow<Resource<List<Product>>>(Resource.Unspecified())
     val specialProducts: StateFlow<Resource<List<Product>>> = _specialProducts
 
@@ -33,12 +34,12 @@ class MainCategoryViewModel @Inject constructor(
         fetchBestProducts()
     }
 
-    private fun fetchSpecialProducts() {
+    fun fetchSpecialProducts() {
         viewModelScope.launch {
             _specialProducts.emit(Resource.Loading())
         }
-        firestore.collection("Products").whereEqualTo("category", "Special Products").get()
-            .addOnSuccessListener { result ->
+        firestore.collection("Products")
+            .whereEqualTo("category", "Special Products").get().addOnSuccessListener { result ->
                 val specialProductsList = result.toObjects(Product::class.java)
                 viewModelScope.launch {
                     _specialProducts.emit(Resource.Success(specialProductsList))
@@ -50,7 +51,7 @@ class MainCategoryViewModel @Inject constructor(
             }
     }
 
-    private fun fetchBestDeals() {
+    fun fetchBestDeals() {
         viewModelScope.launch {
             _bestDealsProducts.emit(Resource.Loading())
         }
@@ -88,13 +89,14 @@ class MainCategoryViewModel @Inject constructor(
             }
         }
     }
-
-    // cái này để giới hạn sản phẩm 1 lần kéo xuống, nếu quá nhiều sẽ ảnh hưởng đến tương tác người dùng
-    // khi kéo xuống đến giới hạn sẽ tự động reload thêm sản phẩm
-    //old để kiểm tra xem cái list này có giong list cũ không, nếu có sẽ không load thanh progress(vẫn gọi fetch nhưng sẽ bị kiểm tra bởi if)
-    internal data class PagingInfo(
-        var bestProductsPage: Long = 1,
-        var oldBestProducts: List<Product> = emptyList(),
-        var isPagingEnd: Boolean = false
-    )
 }
+
+
+// cái này để giới hạn sản phẩm 1 lần kéo xuống, nếu quá nhiều sẽ ảnh hưởng đến tương tác người dùng
+// khi kéo xuống đến giới hạn sẽ tự động reload thêm sản phẩm
+//old để kiểm tra xem cái list này có giong list cũ không, nếu có
+internal data class PagingInfo(
+    var bestProductsPage: Long = 1,
+    var oldBestProducts: List<Product> = emptyList(),
+    var isPagingEnd: Boolean = false
+)
