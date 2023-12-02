@@ -158,6 +158,7 @@
             android:layout_marginTop="45dp"
             android:layout_marginBottom="20dp"
             android:text="Add to cart"
+            app:spinning_bar_padding="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/linearProductPref"
             app:layout_constraintStart_toStartOf="@id/linearProductPref"

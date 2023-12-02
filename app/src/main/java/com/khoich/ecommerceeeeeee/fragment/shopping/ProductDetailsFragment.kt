@@ -10,15 +10,17 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.khoich.ecommerceeeeeee.R
 import com.khoich.ecommerceeeeeee.adapter.ColorsAdapter
 import com.khoich.ecommerceeeeeee.adapter.SizesAdapter
 import com.khoich.ecommerceeeeeee.adapter.ViewPager2Images
+import com.khoich.ecommerceeeeeee.data.CartProduct
 import com.khoich.ecommerceeeeeee.databinding.FragmentProductDetailsBinding
 import com.khoich.ecommerceeeeeee.util.Resource
 import com.khoich.ecommerceeeeeee.util.hideBottomNavigationView
 import com.khoich.ecommerceeeeeee.viewmodel.DetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -34,7 +36,6 @@ class ProductDetailsFragment : Fragment() {
     private var selectedColor: Int? = null
     private var selectedSize: String? = null
     private val viewModel by viewModels<DetailsViewModel>()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -67,29 +68,27 @@ class ProductDetailsFragment : Fragment() {
         }
 
         binding.buttonAddToCart.setOnClickListener {
-//            viewModel.addUpdateProductInCart(CartProduct(product, 1, selectedColor, selectedSize))
+            viewModel.addUpdateProductInCart(CartProduct(product, 1, selectedColor, selectedSize))
         }
 
-//        lifecycleScope.launch{
-//            viewModel.addToCart.collectLatest {
-//                when (it) {
-//                    is Resource.Loading -> {
-//                        binding.buttonAddToCart.startAnimation()
-//                    }
-//
-//                    is Resource.Success -> {
-//                        binding.buttonAddToCart.revertAnimation()
-//                        binding.buttonAddToCart.setBackgroundColor(resources.getColor(R.color.black))
-//                    }
-//
-//                    is Resource.Error -> {
-//                        binding.buttonAddToCart.stopAnimation()
-//                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-//                    }
-//                    else -> Unit
-//                }
-//            }
-//        }
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+            viewModel.addToCart.collectLatest {
+                when (it) {
+                    is Resource.Loading -> {
+                        binding.buttonAddToCart.startAnimation()
+                    }
+
+                    is Resource.Success -> {
+                        binding.buttonAddToCart.revertAnimation()
+                    }
+                    is Resource.Error -> {
+                        binding.buttonAddToCart.stopAnimation()
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    }
+                    else -> Unit
+                }
+            }
+        }
 
         binding.apply {
             val textProductPrice = "$ ${product.price}"
