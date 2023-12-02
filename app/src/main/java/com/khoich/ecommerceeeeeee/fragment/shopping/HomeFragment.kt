@@ -33,12 +33,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         // truyền các frament vào
         val categoriesFragments = arrayListOf(
+            MainCategoryFragment(),
             FurnitureFragment(),
             ChairFragment(),
             TableFragment(),
             AccessoryFragment(),
             CupboardFragment(),
-            MainCategoryFragment(),
         )
 
         binding.viewpagerHome.isUserInputEnabled = false
