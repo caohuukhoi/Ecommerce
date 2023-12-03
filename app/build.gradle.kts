@@ -81,7 +81,7 @@ dependencies {
     kapt("com.google.dagger:hilt-compiler:2.48.1")
 
     // LeakCanary
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.12")
+//    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.12")
 
     // firebase
     implementation("com.google.firebase:firebase-auth:22.3.0")

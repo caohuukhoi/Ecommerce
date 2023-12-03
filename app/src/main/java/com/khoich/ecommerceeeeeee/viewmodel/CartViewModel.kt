@@ -8,6 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.khoich.ecommerceeeeeee.data.CartProduct
 import com.khoich.ecommerceeeeeee.firebase.FirebaseCommon
 import com.khoich.ecommerceeeeeee.util.Resource
+import com.khoich.ecommerceeeeeee.util.getProductPrice
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,8 +33,9 @@ class CartViewModel @Inject constructor(
     val productsPrice = cartProducts.map {
         when (it) {
             is Resource.Success -> {
-//                calculatePrice(it.data!!)
+                calculatePrice(it.data!!)
             }
+
             else -> null
         }
     }
@@ -42,28 +44,9 @@ class CartViewModel @Inject constructor(
 
     private var cartProductDocuments = emptyList<DocumentSnapshot>()
 
-
-    fun deleteCartProduct(cartProduct: CartProduct) {
-        val index = cartProducts.value.data?.indexOf(cartProduct)
-        if (index != null && index != -1) {
-            val documentId = cartProductDocuments[index].id
-            firestore.collection("user").document(auth.uid!!).collection("cart")
-                .document(documentId).delete()
-        }
-    }
-
-
-//    private fun calculatePrice(data: List<CartProduct>): Float {
-//        return data.sumByDouble { cartProduct ->
-//            (cartProduct.product.offerPercentage.getProductPrice(cartProduct.product.price) * cartProduct.quantity).toDouble()
-//        }.toFloat()
-//    }
-
-
     init {
         getCartProducts()
     }
-
 
     private fun getCartProducts() {
         viewModelScope.launch { _cartProducts.emit(Resource.Loading()) }
@@ -113,7 +96,9 @@ class CartViewModel @Inject constructor(
     private fun decreaseQuantity(documentId: String) {
         firebaseCommon.decreaseQuantity(documentId) { result, exception ->
             if (exception != null)
-                viewModelScope.launch { _cartProducts.emit(Resource.Error(exception.message.toString())) }
+                viewModelScope.launch {
+                    _cartProducts.emit(Resource.Error(exception.message.toString()))
+                }
         }
     }
 
@@ -124,5 +109,22 @@ class CartViewModel @Inject constructor(
         }
     }
 
+    fun deleteCartProduct(cartProduct: CartProduct) {
+        val index = cartProducts.value.data?.indexOf(cartProduct)
+        if (index != null && index != -1) {
+            val documentId = cartProductDocuments[index].id
+            firestore.collection("user").document(auth.uid!!).collection("cart")
+                .document(documentId).delete()
+        }
+    }
 
+    private fun calculatePrice(data: List<CartProduct>): Float {
+        var sum = 0f
+        (data.indices).forEach { i ->
+            val totalPriceEachProduct =
+                data[i].product.offerPercentage.getProductPrice(data[i].product.price) * data[i].quantity
+            sum += totalPriceEachProduct
+        }
+        return sum
+    }
 }

@@ -31,6 +31,7 @@ class ShoppingActivity : AppCompatActivity() {
         val navController = findNavController(R.id.shoppingHostFragment)
         binding.bottomNavigation.setupWithNavController(navController)
 
+        // cập nhật hình tròn biểu thị so lượng sp ở bottom navigation
         lifecycleScope.launch {
             viewModel.cartProducts.collectLatest {
                 when (it) {

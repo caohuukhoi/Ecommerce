@@ -13,6 +13,7 @@ class FirebaseCommon(
         firestore.collection("user").document(auth.uid!!).collection("cart")
 
     fun addProductToCart(cartProduct: CartProduct, onResult: (CartProduct?, Exception?) -> Unit) {
+        // dùng document().set() để lát tăng và giam còn có được documentID, còn nếu add thì id tujqw taoj id
         cartCollection.document().set(cartProduct)
             .addOnSuccessListener {
                 onResult(cartProduct, null)

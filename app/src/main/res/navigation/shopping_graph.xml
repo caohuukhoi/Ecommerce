@@ -36,7 +36,11 @@
         android:id="@+id/profileFragment"
         android:name="com.khoich.ecommerceeeeeee.fragment.shopping.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
+    </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
         android:name="com.khoich.ecommerceeeeeee.fragment.shopping.ProductDetailsFragment"
@@ -45,5 +49,14 @@
         <argument
             android:name="product"
             app:argType="com.khoich.ecommerceeeeeee.data.Product" />
+    </fragment>
+    <fragment
+        android:id="@+id/addressFragment"
+        android:name="com.khoich.ecommerceeeeeee.fragment.shopping.AddressFragment"
+        android:label="AddressFragment"
+        tools:layout="@layout/fragment_address">
+        <argument
+            android:name="address"
+            app:argType="com.khoich.ecommerceeeeeee.data.Address" />
     </fragment>
 </navigation>
