@@ -17,11 +17,10 @@ import com.khoich.ecommerceeeeeee.firebase.FirebaseCommon
 import com.khoich.ecommerceeeeeee.util.Resource
 import com.khoich.ecommerceeeeeee.util.VerticalItemDecoration
 import com.khoich.ecommerceeeeeee.viewmodel.CartViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class CartFragment : Fragment(R.layout.fragment_cart){
+class CartFragment : Fragment(R.layout.fragment_cart) {
     private lateinit var binding: FragmentCartBinding
     private val cartAdapter by lazy { CartProductAdapter() }
     private val viewModel by activityViewModels<CartViewModel>()
@@ -38,12 +37,14 @@ class CartFragment : Fragment(R.layout.fragment_cart){
         super.onViewCreated(view, savedInstanceState)
 
         setupCartRv()
+        var totalPrice = 0f
 
         lifecycleScope.launch {
             viewModel.productsPrice.collectLatest {
                 it?.let {
                     val textTotalPrice = "$ $it"
                     binding.tvTotalPrice.text = textTotalPrice
+                    totalPrice = it
                 }
             }
         }
@@ -54,6 +55,7 @@ class CartFragment : Fragment(R.layout.fragment_cart){
                     is Resource.Loading -> {
                         binding.progressbarCart.visibility = View.VISIBLE
                     }
+
                     is Resource.Success -> {
                         binding.progressbarCart.visibility = View.INVISIBLE
                         if (it.data!!.isEmpty()) {
@@ -65,10 +67,12 @@ class CartFragment : Fragment(R.layout.fragment_cart){
                             cartAdapter.differ.submitList(it.data)
                         }
                     }
+
                     is Resource.Error -> {
                         binding.progressbarCart.visibility = View.INVISIBLE
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                     }
+
                     else -> Unit
                 }
             }
@@ -108,10 +112,14 @@ class CartFragment : Fragment(R.layout.fragment_cart){
             }
         }
 
-//        binding.buttonCheckout.setOnClickListener {
-//            val action = CartFragmentDirections.actionCartFragmentToBillingFragment2(totalPrice,cartAdapter.differ.currentList.toTypedArray(),true)
-//            findNavController().navigate(action)
-//        }
+        binding.buttonCheckout.setOnClickListener {
+            val action = CartFragmentDirections.actionCartFragmentToBillingFragment(
+                totalPrice,
+                cartAdapter.differ.currentList.toTypedArray(),
+                payment = true
+            )
+            findNavController().navigate(action)
+        }
     }
 
     private fun showOtherViews() {
@@ -138,7 +146,7 @@ class CartFragment : Fragment(R.layout.fragment_cart){
         binding.layoutCartEmpty.visibility = View.VISIBLE
     }
 
-    private fun setupCartRv(){
+    private fun setupCartRv() {
         binding.rvCart.apply {
             adapter = cartAdapter
             addItemDecoration(VerticalItemDecoration())
