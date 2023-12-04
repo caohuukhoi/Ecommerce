@@ -26,7 +26,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
         super.onViewCreated(view, savedInstanceState)
 
         binding.btn.setOnClickListener{
-            findNavController().navigate(R.id.action_profileFragment_to_userAccountFragment)
+            findNavController().navigate(R.id.action_profileFragment_to_allOrdersFragment)
         }
     }
 

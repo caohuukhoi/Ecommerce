@@ -147,6 +147,7 @@ class BillingFragment : Fragment() {
             }
             setPositiveButton("Yes") { dialog, _ ->
                 val order = Order(
+                    // Dat trang thai ban dau la Ordered
                     OrderStatus.Ordered.status,
                     totalPrice,
                     productList,
