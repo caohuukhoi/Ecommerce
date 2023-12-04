@@ -66,6 +66,15 @@ class BillingFragment : Fragment() {
         setupBillingProductsRv()
         setupAddressRv()
 
+        if (!args.payment) {
+            binding.apply {
+                buttonPlaceOrder.visibility = View.INVISIBLE
+                totalBoxContainer.visibility = View.INVISIBLE
+                middleLine.visibility = View.INVISIBLE
+                bottomLine.visibility = View.INVISIBLE
+            }
+        }
+
         billingProductsAdapter.differ.submitList(productList)
         val textTotalPrice = "$ $totalPrice"
         binding.tvTotalPrice.text = textTotalPrice
@@ -86,6 +95,10 @@ class BillingFragment : Fragment() {
                 return@setOnClickListener
             }
             showOrderConfirmationDialog()
+        }
+
+        binding.imageCloseBilling.setOnClickListener{
+            findNavController().popBackStack()
         }
 
         lifecycleScope.launch {
