@@ -41,8 +41,8 @@
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_profileFragment_to_addressFragment"
-            app:destination="@id/addressFragment" />
+            android:id="@+id/action_profileFragment_to_userAccountFragment"
+            app:destination="@id/userAccountFragment" />
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
@@ -80,4 +80,8 @@
             android:name="payment"
             app:argType="boolean" />
     </fragment>
+    <fragment
+        android:id="@+id/userAccountFragment"
+        android:name="com.khoich.ecommerceeeeeee.fragment.settings.UserAccountFragment"
+        android:label="UserAccountFragment" />
 </navigation>

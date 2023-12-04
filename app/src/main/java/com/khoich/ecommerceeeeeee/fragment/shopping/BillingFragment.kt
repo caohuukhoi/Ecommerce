@@ -23,6 +23,7 @@ import com.khoich.ecommerceeeeeee.databinding.FragmentBillingBinding
 import com.khoich.ecommerceeeeeee.util.HorizontalItemDecoration
 import com.khoich.ecommerceeeeeee.util.Resource
 import com.khoich.ecommerceeeeeee.util.VerticalItemDecoration
+import com.khoich.ecommerceeeeeee.util.hideBottomNavigationView
 import com.khoich.ecommerceeeeeee.viewmodel.BillingViewModel
 import com.khoich.ecommerceeeeeee.viewmodel.OrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,6 +55,7 @@ class BillingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+        hideBottomNavigationView()
         binding = FragmentBillingBinding.inflate(inflater)
         return binding.root
     }

@@ -14,6 +14,7 @@ import com.khoich.ecommerceeeeeee.R
 import com.khoich.ecommerceeeeeee.data.Address
 import com.khoich.ecommerceeeeeee.databinding.FragmentAddressBinding
 import com.khoich.ecommerceeeeeee.util.Resource
+import com.khoich.ecommerceeeeeee.util.hideBottomNavigationView
 import com.khoich.ecommerceeeeeee.viewmodel.AddressViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -61,6 +62,7 @@ class AddressFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+        hideBottomNavigationView()
         binding = FragmentAddressBinding.inflate(inflater)
         return binding.root
     }

@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.khoich.ecommerceeeeeee.R
 import com.khoich.ecommerceeeeeee.databinding.FragmentProfileBinding
+import com.khoich.ecommerceeeeeee.util.hideBottomNavigationView
+import com.khoich.ecommerceeeeeee.util.showBottomNavigationView
 
 class ProfileFragment : Fragment(R.layout.fragment_profile){
     private lateinit var binding: FragmentProfileBinding
@@ -24,7 +26,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile){
         super.onViewCreated(view, savedInstanceState)
 
         binding.btn.setOnClickListener{
-            findNavController().navigate(R.id.action_profileFragment_to_addressFragment)
+            findNavController().navigate(R.id.action_profileFragment_to_userAccountFragment)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showBottomNavigationView()
     }
 }

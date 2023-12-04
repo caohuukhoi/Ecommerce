@@ -28,21 +28,24 @@ class ChairFragment : BaseCategoryFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             viewModel.offerProducts.collectLatest {
                 when (it) {
                     is Resource.Loading -> {
                         showOfferLoading()
                     }
+
                     is Resource.Success -> {
                         offerAdapter.differ.submitList(it.data)
                         hideOfferLoading()
                     }
+
                     is Resource.Error -> {
                         Snackbar.make(requireView(), it.message.toString(), Snackbar.LENGTH_LONG)
                             .show()
                         hideOfferLoading()
                     }
+
                     else -> Unit
                 }
             }
@@ -54,15 +57,18 @@ class ChairFragment : BaseCategoryFragment() {
                     is Resource.Loading -> {
                         showBestProductsLoading()
                     }
+
                     is Resource.Success -> {
                         bestProductsAdapter.differ.submitList(it.data)
                         hideBestProductsLoading()
                     }
+
                     is Resource.Error -> {
                         Snackbar.make(requireView(), it.message.toString(), Snackbar.LENGTH_LONG)
                             .show()
                         hideBestProductsLoading()
                     }
+
                     else -> Unit
                 }
             }

@@ -15,6 +15,7 @@ import com.khoich.ecommerceeeeeee.fragment.categories.CupboardFragment
 import com.khoich.ecommerceeeeeee.fragment.categories.FurnitureFragment
 import com.khoich.ecommerceeeeeee.fragment.categories.MainCategoryFragment
 import com.khoich.ecommerceeeeeee.fragment.categories.TableFragment
+import com.khoich.ecommerceeeeeee.util.showBottomNavigationView
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
@@ -62,4 +63,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }.attach()
     }
 
+    override fun onResume() {
+        super.onResume()
+        showBottomNavigationView()
+    }
 }

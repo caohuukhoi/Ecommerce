@@ -16,6 +16,7 @@ import com.khoich.ecommerceeeeeee.databinding.FragmentCartBinding
 import com.khoich.ecommerceeeeeee.firebase.FirebaseCommon
 import com.khoich.ecommerceeeeeee.util.Resource
 import com.khoich.ecommerceeeeeee.util.VerticalItemDecoration
+import com.khoich.ecommerceeeeeee.util.showBottomNavigationView
 import com.khoich.ecommerceeeeeee.viewmodel.CartViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -151,5 +152,10 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             adapter = cartAdapter
             addItemDecoration(VerticalItemDecoration())
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showBottomNavigationView()
     }
 }
