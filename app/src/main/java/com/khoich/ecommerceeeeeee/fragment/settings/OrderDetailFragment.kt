@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.khoich.ecommerceeeeeee.adapter.BillingProductsAdapter
 import com.khoich.ecommerceeeeeee.data.order.OrderStatus
@@ -34,6 +35,10 @@ class OrderDetailFragment : Fragment() {
         val order = args.order
 
         setupOrderRv()
+
+        binding.imageCloseOrder.setOnClickListener{
+            findNavController().popBackStack()
+        }
 
         binding.apply {
 

@@ -1,4 +1,4 @@
-package com.khoich.ecommerceeeeeee.fragment.shopping
+package com.khoich.ecommerceeeeeee.fragment.shopping.user
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,22 +12,26 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.khoich.ecommerceeeeeee.R
 import com.khoich.ecommerceeeeeee.data.Address
-import com.khoich.ecommerceeeeeee.databinding.FragmentAddressBinding
+import com.khoich.ecommerceeeeeee.databinding.FragmentAddAddressBinding
 import com.khoich.ecommerceeeeeee.util.Resource
 import com.khoich.ecommerceeeeeee.util.hideBottomNavigationView
-import com.khoich.ecommerceeeeeee.viewmodel.AddressViewModel
+import com.khoich.ecommerceeeeeee.viewmodel.AddAddressViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class AddressFragment : Fragment() {
-    private lateinit var binding: FragmentAddressBinding
-    val viewModel by viewModels<AddressViewModel>()
-    private val args by navArgs<AddressFragmentArgs>()
+class AddAddressFragment : Fragment() {
+    private lateinit var binding: FragmentAddAddressBinding
+    val viewModel by viewModels<AddAddressViewModel>()
+//    private val args by navArgs<AddressFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding.imageAddressClose.setOnClickListener{
+            findNavController().popBackStack()
+        }
         lifecycleScope.launch {
             viewModel.addNewAddress.collectLatest {
                 when (it) {
@@ -63,22 +67,22 @@ class AddressFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         hideBottomNavigationView()
-        binding = FragmentAddressBinding.inflate(inflater)
+        binding = FragmentAddAddressBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val address = args.address
-        binding.apply {
-            edAddressTitle.setText(address.addressTitle)
-            edFullName.setText(address.fullName)
-            edState.setText(address.street)
-            edPhone.setText(address.phone)
-            edCity.setText(address.city)
-            edState.setText(address.state)
-        }
+//        val address = args.address
+//        binding.apply {
+//            edAddressTitle.setText(address.addressTitle)
+//            edFullName.setText(address.fullName)
+//            edState.setText(address.street)
+//            edPhone.setText(address.phone)
+//            edCity.setText(address.city)
+//            edState.setText(address.state)
+//        }
 
         binding.apply {
             buttonSave.setOnClickListener {

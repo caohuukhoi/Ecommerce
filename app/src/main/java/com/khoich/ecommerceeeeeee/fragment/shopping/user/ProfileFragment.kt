@@ -1,4 +1,4 @@
-package com.khoich.ecommerceeeeeee.fragment.shopping
+package com.khoich.ecommerceeeeeee.fragment.shopping.user
 
 import android.content.Intent
 import android.graphics.Color
@@ -47,14 +47,18 @@ class ProfileFragment : Fragment(){
             findNavController().navigate(R.id.action_profileFragment_to_allOrdersFragment)
         }
 
-        binding.linearBilling.setOnClickListener {
-            val action = ProfileFragmentDirections.actionProfileFragmentToBillingFragment(
-                0f,
-                emptyArray(),
-                false
-            )
-            findNavController().navigate(action)
+        binding.tvAddress.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_allAddressFragment)
         }
+
+//        binding.linearBilling.setOnClickListener {
+//            val action = ProfileFragmentDirections.actionProfileFragmentToBillingFragment(
+//                0f,
+//                emptyArray(),
+//                false
+//            )
+//            findNavController().navigate(action)
+//        }
 
         binding.linearLogOut.setOnClickListener {
             viewModel.logout()

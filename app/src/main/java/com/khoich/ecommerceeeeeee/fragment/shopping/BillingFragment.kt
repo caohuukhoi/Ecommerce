@@ -81,7 +81,7 @@ class BillingFragment : Fragment() {
 
 
         binding.imageAddAddress.setOnClickListener {
-            findNavController().navigate(R.id.action_billingFragment_to_addressFragment)
+            findNavController().navigate(R.id.action_billingFragment_to_addAddressFragment)
         }
 
         addressAdapter.onClick = {

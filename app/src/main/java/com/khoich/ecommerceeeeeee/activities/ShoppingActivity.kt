@@ -28,6 +28,7 @@ class ShoppingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        // dongf nay de chuyen giuwa cac fragment
         val navController = findNavController(R.id.shoppingHostFragment)
         binding.bottomNavigation.setupWithNavController(navController)
 

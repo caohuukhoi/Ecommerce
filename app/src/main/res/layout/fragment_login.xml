@@ -20,12 +20,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="110dp"
-            android:drawableStart="@drawable/ic_name_shape"
             android:drawablePadding="6dp"
             android:text="By HuuKhoi"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/guidelineLoginLeft"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:drawableStartCompat="@drawable/ic_name_shape" />
 
         <TextView
             android:id="@+id/tvLetsLogin"

@@ -13,15 +13,21 @@
         <action
             android:id="@+id/action_homeFragment_to_productDetailsFragment"
             app:destination="@id/productDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.khoich.ecommerceeeeeee.fragment.shopping.SearchFragment"
-        android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
+        android:id="@+id/favoriteFragment"
+        android:name="com.khoich.ecommerceeeeeee.fragment.shopping.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" >
         <action
-            android:id="@+id/action_searchFragment_to_productDetailsFragment"
+            android:id="@+id/action_favoriteFragment_to_productDetailsFragment"
             app:destination="@id/productDetailsFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -37,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.khoich.ecommerceeeeeee.fragment.shopping.ProfileFragment"
+        android:name="com.khoich.ecommerceeeeeee.fragment.shopping.user.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
@@ -47,8 +53,8 @@
             android:id="@+id/action_profileFragment_to_allOrdersFragment"
             app:destination="@id/allOrdersFragment" />
         <action
-            android:id="@+id/action_profileFragment_to_billingFragment"
-            app:destination="@id/billingFragment" />
+            android:id="@+id/action_profileFragment_to_allAddressFragment"
+            app:destination="@id/allAddressFragment" />
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
@@ -60,22 +66,10 @@
             app:argType="com.khoich.ecommerceeeeeee.data.Product" />
     </fragment>
     <fragment
-        android:id="@+id/addressFragment"
-        android:name="com.khoich.ecommerceeeeeee.fragment.shopping.AddressFragment"
-        android:label="AddressFragment"
-        tools:layout="@layout/fragment_address">
-        <argument
-            android:name="address"
-            app:argType="com.khoich.ecommerceeeeeee.data.Address" />
-    </fragment>
-    <fragment
         android:id="@+id/billingFragment"
         android:name="com.khoich.ecommerceeeeeee.fragment.shopping.BillingFragment"
         android:label="BillingFragment"
         tools:layout="@layout/fragment_billing">
-        <action
-            android:id="@+id/action_billingFragment_to_addressFragment"
-            app:destination="@id/addressFragment" />
         <argument
             android:name="totalPrice"
             app:argType="float" />
@@ -85,6 +79,9 @@
         <argument
             android:name="payment"
             app:argType="boolean" />
+        <action
+            android:id="@+id/action_billingFragment_to_addAddressFragment"
+            app:destination="@id/addAddressFragment" />
     </fragment>
     <fragment
         android:id="@+id/userAccountFragment"
@@ -109,4 +106,40 @@
             android:name="order"
             app:argType="com.khoich.ecommerceeeeeee.data.order.Order" />
     </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.khoich.ecommerceeeeeee.fragment.shopping.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAddressFragment"
+        android:name="com.khoich.ecommerceeeeeee.fragment.shopping.user.AddAddressFragment"
+        android:label="AddAddressFragment"
+        tools:layout="@layout/fragment_add_address"/>
+    <fragment
+        android:id="@+id/allAddressFragment"
+        android:name="com.khoich.ecommerceeeeeee.fragment.shopping.user.AllAddressFragment"
+        android:label="fragment_all_address"
+        tools:layout="@layout/fragment_all_address" >
+        <action
+            android:id="@+id/action_allAddressFragment_to_addAddressFragment"
+            app:destination="@id/addAddressFragment" />
+        <action
+            android:id="@+id/action_allAddressFragment_to_editAddressFragment"
+            app:destination="@id/editAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editAddressFragment"
+        android:name="com.khoich.ecommerceeeeeee.fragment.shopping.user.EditAddressFragment"
+        android:label="fragment_edit_address"
+        tools:layout="@layout/fragment_edit_address" />
+    <fragment
+        android:id="@+id/messageFragment"
+        android:name="com.khoich.ecommerceeeeeee.fragment.shopping.MessageFragment"
+        android:label="fragment_message"
+        tools:layout="@layout/fragment_message" />
 </navigation>

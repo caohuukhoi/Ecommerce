@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.khoich.ecommerceeeeeee.adapter.AllOrdersAdapter
 import com.khoich.ecommerceeeeeee.databinding.FragmentOrdersBinding
 import com.khoich.ecommerceeeeeee.util.Resource
+import com.khoich.ecommerceeeeeee.util.hideBottomNavigationView
 import com.khoich.ecommerceeeeeee.viewmodel.AllOrdersViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -28,6 +29,7 @@ class AllOrdersFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        hideBottomNavigationView()
         binding = FragmentOrdersBinding.inflate(inflater)
         return binding.root
     }
@@ -65,6 +67,10 @@ class AllOrdersFragment : Fragment() {
             findNavController().navigate(action)
         }
 
+        binding.imageCloseOrders.setOnClickListener{
+            findNavController().popBackStack()
+        }
+
     }
 
     private fun setupOrdersRv() {
@@ -72,4 +78,6 @@ class AllOrdersFragment : Fragment() {
             adapter = ordersAdapter
         }
     }
+
+
 }
